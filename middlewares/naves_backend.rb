@@ -36,8 +36,13 @@ module Naves
         ws.on :message do |event|
           p [:message, event.data]
           data = JSON.parse event.data
-          @redis.set(data["player"], event.data)
+          if data['channel'] == 'delete'
+            @redis.del(data['player'])
+          elsif data['player']
+            @redis.set(data['player'], event.data)
+          end
           @redis.publish(CHANNEL, event.data)
+
         end
 
         ws.on :close do |event|
