@@ -26,6 +26,7 @@ module Naves
 
     get '/js/control.js' do
       @scheme = ENV['RACK_ENV'] == "production" ? "wss://" : "ws://"
+      p @scheme
       erb :"control.js"
     end
 
