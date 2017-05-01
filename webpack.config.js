@@ -2,7 +2,7 @@ const path = require('path');
 require("babel-polyfill");
 
 module.exports = {
-  entry: { gamebundle: "./js/index.js", control: "./js/controls/index.js" },
+  entry: { gamebundle: "./js/index.js.erb", control: "./js/controls/index.js" },
   output: { filename: "./views/[name].js.erb" },
 
 	module: {

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 199);
+/******/ 	return __webpack_require__(__webpack_require__.s = 196);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -24745,7 +24745,7 @@ var _spaceship = __webpack_require__(137);
 
 var _spaceship2 = _interopRequireDefault(_spaceship);
 
-var _bulletmanager = __webpack_require__(196);
+var _bulletmanager = __webpack_require__(197);
 
 var _bulletmanager2 = _interopRequireDefault(_bulletmanager);
 
@@ -24913,6 +24913,34 @@ exports.default = new Loader();
 
 /***/ }),
 /* 196 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__game__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__loader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spaceship__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spaceship___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__spaceship__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__server_client__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__server_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__server_client__);
+
+
+
+
+// const deepstream = require('deepstream.io-client-js')
+
+const SERVER_URL = '<%= @scheme %>' + location.host;
+
+const sc = new __WEBPACK_IMPORTED_MODULE_3__server_client___default.a(SERVER_URL);
+__WEBPACK_IMPORTED_MODULE_1__loader___default.a.load(sc, () => {
+  new __WEBPACK_IMPORTED_MODULE_0__game___default.a(document.body, sc);
+});
+
+
+/***/ }),
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25011,42 +25039,8 @@ var BulletManager = function () {
 exports.default = BulletManager;
 
 /***/ }),
-/* 197 */,
 /* 198 */,
-/* 199 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _game = __webpack_require__(194);
-
-var _game2 = _interopRequireDefault(_game);
-
-var _loader = __webpack_require__(195);
-
-var _loader2 = _interopRequireDefault(_loader);
-
-var _spaceship = __webpack_require__(137);
-
-var _spaceship2 = _interopRequireDefault(_spaceship);
-
-var _serverClient = __webpack_require__(82);
-
-var _serverClient2 = _interopRequireDefault(_serverClient);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// const deepstream = require('deepstream.io-client-js')
-
-var SERVER_URL = 'ws://' + location.host;
-
-var sc = new _serverClient2.default(SERVER_URL);
-_loader2.default.load(sc, function () {
-  new _game2.default(document.body, sc);
-});
-
-/***/ }),
+/* 199 */,
 /* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
