@@ -3,7 +3,7 @@ import ServerClient from '../server-client';
 import $ from 'jquery';
 
 $(function() {
-	const SERVER_URL = 'wss:///';
+  const SERVER_URL = 'ws://' + location.host;
   let sc;
   let moveArea, shootArea;
 
