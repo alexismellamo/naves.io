@@ -8599,16 +8599,8 @@ var ServerClient = function () {
 
     this.ws = new WebSocket(url);
     this.ws.onmessage = this.onmessage.bind(this);
-    console.dir(this.ws);
     this.records = [];
   }
-
-  // record = {
-  //   getRecord(recordName, callback) {
-
-  //     callback(record)
-  //   }
-  // }
 
   (0, _createClass3.default)(ServerClient, [{
     key: 'onmessage',
@@ -16603,7 +16595,6 @@ var SpaceShip = function () {
 						if (!this.record.ready || !data.bodyRotation) {
 								return;
 						}
-						console.log(data);
 
 						/*
         t = (vf - vi) / a
@@ -24931,7 +24922,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // const deepstream = require('deepstream.io-client-js')
 
-console.log('<%= @scheme %>');
 const SERVER_URL = '<%= @scheme %>' + location.host;
 
 const sc = new __WEBPACK_IMPORTED_MODULE_3__server_client___default.a(SERVER_URL);

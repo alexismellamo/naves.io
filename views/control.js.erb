@@ -1082,16 +1082,8 @@ var ServerClient = function () {
 
     this.ws = new WebSocket(url);
     this.ws.onmessage = this.onmessage.bind(this);
-    console.dir(this.ws);
     this.records = [];
   }
-
-  // record = {
-  //   getRecord(recordName, callback) {
-
-  //     callback(record)
-  //   }
-  // }
 
   (0, _createClass3.default)(ServerClient, [{
     key: 'onmessage',
@@ -13297,14 +13289,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_2_jquery___default()(function() {
-	console.log('<%= @scheme %>');
   const SERVER_URL = '<%= @scheme %>' + location.host;
   let sc;
   let moveArea, shootArea;
 
 	const joinGame = () => {
 		const name = __WEBPACK_IMPORTED_MODULE_2_jquery___default()( 'input#name' ).val();
-    console.log(sc.getRecord(name));
     sc.getRecord(name).whenIsReady((record) => {
       record.setInitial({
 				name: name,

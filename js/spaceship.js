@@ -107,7 +107,6 @@ class SpaceShip {
     if(!this.record.ready || !data.bodyRotation) {
 			return;
 		}
-    console.log(data);
 
     /*
       t = (vf - vi) / a

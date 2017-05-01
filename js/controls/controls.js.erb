@@ -3,14 +3,12 @@ import ServerClient from '../server-client';
 import $ from 'jquery';
 
 $(function() {
-	console.log('<%= @scheme %>');
   const SERVER_URL = '<%= @scheme %>' + location.host;
   let sc;
   let moveArea, shootArea;
 
 	const joinGame = () => {
 		const name = $( 'input#name' ).val();
-    console.log(sc.getRecord(name));
     sc.getRecord(name).whenIsReady((record) => {
       record.setInitial({
 				name: name,

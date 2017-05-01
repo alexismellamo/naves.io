@@ -2,17 +2,8 @@ class ServerClient {
 	constructor(url) {
     this.ws = new WebSocket(url);
     this.ws.onmessage = this.onmessage.bind(this);
-    console.dir(this.ws);
     this.records = [];
 	}
-
-  // record = {
-  //   getRecord(recordName, callback) {
-
-  //     callback(record)
-  //   }
-  // }
-
   onmessage(message) {
     const data = JSON.parse(message.data);
     if (data.player) {
