@@ -24,6 +24,16 @@ module Naves
       erb :"controls.html"
     end
 
+    get '/js/control.js' do
+      @scheme = ENV['RACK_ENV'] == "production" ? "wss://" : "ws://"
+      erb :"control.js"
+    end
+
+    get '/js/game.js' do
+      @scheme = ENV['RACK_ENV'] == "production" ? "wss://" : "ws://"
+      erb :"game.js"
+    end
+
     get '/:player' do
       record = @redis.get(params['player'])
       p record

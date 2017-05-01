@@ -4,7 +4,7 @@ import Spaceship from './spaceship';
 import ServerClient from './server-client';
 // const deepstream = require('deepstream.io-client-js')
 
-const SERVER_URL = 'ws://' + location.host;
+const SERVER_URL = '<%= @scheme %>' + location.host;
 
 const sc = new ServerClient(SERVER_URL);
 loader.load(sc, () => {
