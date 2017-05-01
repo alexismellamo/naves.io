@@ -63,7 +63,7 @@ class SpaceShip {
   }
 
   checkHit({position, source}) {
-		if(this.body.containsPoint(position)) {
+		if(this.body.containsPoint(position) && !this.isDestroyed) {
 			this.body.tint = 0xFF0000;
 			this.turret.tint = 0xFF0000;
       setTimeout(() => {
@@ -74,16 +74,14 @@ class SpaceShip {
 			this.health -= 1;
 
 			if(this.health <= 0) {
-        console.log('why?');
-        if (!this.isDestroyed) source.kills += 1;
+        source.kills += 1;
 			  this.onDestroyed();
 			} else {
 				const healtRemain = (this.health / MAX_HEALTH);
 				const g = Math.floor(healtRemain * 255);
 				const r = Math.floor((1 - healtRemain) * 255);
 
-				// this.text.style = {...this.textStyle, fill: `rgb(${r}, ${g}, 0)`};
-				this.text.style = Object.assign(this.textStyle, {fill: `rgb(${r}, ${g}, 0)`});
+				this.text.style = {...this.textStyle, fill: `rgb(${r}, ${g}, 0)`};
       }
 			return true;
 		}

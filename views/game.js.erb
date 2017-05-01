@@ -16463,9 +16463,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _assign = __webpack_require__(68);
+var _extends2 = __webpack_require__(88);
 
-var _assign2 = _interopRequireDefault(_assign);
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _classCallCheck2 = __webpack_require__(29);
 
@@ -16550,7 +16550,7 @@ var SpaceShip = function () {
       var position = _ref.position,
           source = _ref.source;
 
-      if (this.body.containsPoint(position)) {
+      if (this.body.containsPoint(position) && !this.isDestroyed) {
         this.body.tint = 0xFF0000;
         this.turret.tint = 0xFF0000;
         setTimeout(function () {
@@ -16561,16 +16561,14 @@ var SpaceShip = function () {
         this.health -= 1;
 
         if (this.health <= 0) {
-          console.log('why?');
-          if (!this.isDestroyed) source.kills += 1;
+          source.kills += 1;
           this.onDestroyed();
         } else {
           var healtRemain = this.health / MAX_HEALTH;
           var g = Math.floor(healtRemain * 255);
           var r = Math.floor((1 - healtRemain) * 255);
 
-          // this.text.style = {...this.textStyle, fill: `rgb(${r}, ${g}, 0)`};
-          this.text.style = (0, _assign2.default)(this.textStyle, { fill: 'rgb(' + r + ', ' + g + ', 0)' });
+          this.text.style = (0, _extends3.default)({}, this.textStyle, { fill: 'rgb(' + r + ', ' + g + ', 0)' });
         }
         return true;
       }
