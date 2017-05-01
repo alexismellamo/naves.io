@@ -17,7 +17,11 @@ module Naves
     end
 
     get '/' do
-      erb :"index.html"
+      erb :"game.html"
+    end
+
+    get '/controls' do
+      erb :"controls.html"
     end
 
     get '/:player' do

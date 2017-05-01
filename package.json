@@ -1,0 +1,33 @@
+{
+  "name": "naves.io",
+  "version": "1.0.0",
+  "description": "A  fun game with naves",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors --host 0.0.0.0",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+  },
+  "keywords": [
+    "game",
+    "naves",
+    "multiplayer"
+  ],
+  "author": "Alexis Navarro",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "deepstream.io": "^2.2.0",
+    "deepstream.io-client-js": "^2.1.4",
+    "jquery": "^3.2.1",
+    "pixi.js": "^4.5.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0"
+  }
+}
