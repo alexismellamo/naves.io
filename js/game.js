@@ -6,7 +6,6 @@ const EventEmitter = require( 'events' ).EventEmitter;
 class Game extends EventEmitter {
   constructor(element, sc) {
     super();
-    console.log('?');
     this.stage = new PIXI.Container();
     this.sc = sc;
     this.renderer = PIXI.autoDetectRenderer(
