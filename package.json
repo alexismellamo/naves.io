@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --colors --host 0.0.0.0",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "game",
