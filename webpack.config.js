@@ -3,7 +3,7 @@ require("babel-polyfill");
 
 module.exports = {
   entry: { gamebundle: "./js/index.js", control: "./js/controls/index.js" },
-  output: { filename: "public/assets/js/[name].js" },
+  output: { filename: "./public/js/[name].js" },
 
 	module: {
 		loaders: [
