@@ -70,7 +70,7 @@ class Record {
 
   async setRecord() {
     try {
-      const response = await fetch(`http://localhost:5000/${this.name}`);
+      const response = await fetch(`/${this.name}`);
       const data = await response.json();
       this.data = data;
       this.ready = true;
