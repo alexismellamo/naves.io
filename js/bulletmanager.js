@@ -39,7 +39,7 @@ export default class BulletManager {
 			} else {
         this.game.spaceShips.forEach((spaceShip, index) => {
           if(spaceShip == bullet.source) return;
-					if(this.game.spaceShips[index].checkHit(bullet.position)) {
+					if(this.game.spaceShips[index].checkHit(bullet)) {
 						this.recycleBullet(bullet, i);
 					}
         });

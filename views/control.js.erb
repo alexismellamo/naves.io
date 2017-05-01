@@ -1101,7 +1101,6 @@ var ServerClient = function () {
         this.onNewPlayerCallback(data.name);
       }
       if (data.channel === 'delete') {
-        alert('sorry');
         var recordToRemove = this.records.find(function (record) {
           return record.name === data.player;
         });

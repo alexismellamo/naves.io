@@ -6,6 +6,7 @@ const EventEmitter = require( 'events' ).EventEmitter;
 class Game extends EventEmitter {
   constructor(element, sc) {
     super();
+    console.log('?');
     this.stage = new PIXI.Container();
     this.sc = sc;
     this.renderer = PIXI.autoDetectRenderer(
@@ -15,6 +16,7 @@ class Game extends EventEmitter {
       false
     );
     this.spaceShips = [];
+    this.scores = [];
     this.lastFrameTime = 0;
 
     this.bulletManager = new BulletManager(this);
@@ -22,7 +24,6 @@ class Game extends EventEmitter {
     element.appendChild(this.renderer.view);
     requestAnimationFrame(this.tick.bind(this));
 
-		// sc.event.listen('status/.*', this.playerOnlineStatusChanged.bind(this));
     this.sc.onNewPlayer(this.addPlayer.bind(this));
   }
 
@@ -30,24 +31,26 @@ class Game extends EventEmitter {
     this.emit('update', currentTime - this.lastFrameTime, currentTime);
     this.lastFrameTime = currentTime;
     this.renderer.render(this.stage);
+    this.scores.forEach(score => {
+      score.text = `${score.spaceship.name} - ${score.spaceship.kills}`;
+    })
     requestAnimationFrame(this.tick.bind(this));
-  }
-
-  playerOnlineStatusChanged(match, isSubscribed) {
-		const name = match.replace('status/', '');
-
-		if(isSubscribed) {
-			this.addPlayer(name);
-		} else {
-			this.removePlayer(name);
-		}
 	}
 
   addPlayer(name) {
     if (!this.spaceShips.some((space) => space.name === name)) {
 		  const x = this.renderer.width * (0.1 + Math.random() * 0.8);
 		  const y = this.renderer.height * (0.1 + Math.random() * 0.8);
-		  this.spaceShips = [...this.spaceShips, new SpaceShip(this, x, y, name, this.sc)];
+      const spaceship = new SpaceShip(this, x, y, name, this.sc);
+		  this.spaceShips = [...this.spaceShips, spaceship];
+      const textStyle = { fontFamily : 'Arial', fontSize: '14px', fill: 'rgb(0,255,0)', align : 'center' };
+      const score = new PIXI.Text(`${name} - ${spaceship.kills}`, textStyle);
+      score.anchor.x = 0.5;
+      score.anchor.y = 0.5;
+      score.position = { x: this.renderer.width - 100, y: this.scores.length * 20 + 50};
+      score.spaceship = spaceship;
+      this.scores = [...this.scores, score];
+      this.stage.addChild(score)
     }
 	}
 

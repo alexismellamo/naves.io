@@ -16,7 +16,6 @@ class ServerClient {
       this.onNewPlayerCallback(data.name);
     }
     if(data.channel === 'delete') {
-      alert('sorry');
       const recordToRemove = this.records.find(record => record.name === data.player);
       if(recordToRemove) {
         this.records = this.records.filter(record => record.name !== data.player);

@@ -8618,7 +8618,6 @@ var ServerClient = function () {
         this.onNewPlayerCallback(data.name);
       }
       if (data.channel === 'delete') {
-        alert('sorry');
         var recordToRemove = this.records.find(function (record) {
           return record.name === data.player;
         });
@@ -16461,7 +16460,7 @@ Url.prototype.parseHost = function() {
 /* WEBPACK VAR INJECTION */(function(global) {
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+  value: true
 });
 
 var _assign = __webpack_require__(68);
@@ -16489,114 +16488,120 @@ var FIRE_INTERVAL = 100;
 var TURRET_LENGTH = 27;
 
 var SpaceShip = function () {
-		function SpaceShip(game, x, y, name, ds) {
-				(0, _classCallCheck3.default)(this, SpaceShip);
+  function SpaceShip(game, x, y, name, ds) {
+    (0, _classCallCheck3.default)(this, SpaceShip);
 
-				this.game = game;
-				this.record = ds.getRecord(name);
-				this.tint = colors[Math.floor(Math.random() * colors.length)];
+    this.game = game;
+    this.record = ds.getRecord(name);
+    this.tint = colors[Math.floor(Math.random() * colors.length)];
 
-				// container
-				this.container = new PIXI.Container();
-				this.container.position.x = x;
-				this.container.position.y = y;
+    // container
+    this.container = new PIXI.Container();
+    this.container.position.x = x;
+    this.container.position.y = y;
 
-				// body
-				this.body = PIXI.Sprite.fromImage('/img/' + (Math.random() >= 0.5 ? 'F5S4' : 'spaceship-body') + '.png');
-				this.body.tint = this.tint;
-				this.body.anchor.x = 0.5;
-				this.body.anchor.y = 0.5;
-				this.container.addChild(this.body);
+    // body
+    this.body = PIXI.Sprite.fromImage('/img/' + (Math.random() >= 0.5 ? 'F5S4' : 'spaceship-body') + '.png');
+    this.body.tint = this.tint;
+    this.body.anchor.x = 0.5;
+    this.body.anchor.y = 0.5;
+    this.container.addChild(this.body);
 
-				// turret
-				this.turret = PIXI.Sprite.fromImage('/img/spaceship-turret.png');
-				this.turret.tint = this.tint;
-				this.turret.anchor.x = 0.45;
-				this.turret.anchor.y = 0.6;
-				this.turret.pivot.x = 1;
-				this.turret.pivot.y = 7;
-				this.container.addChild(this.turret);
+    // turret
+    this.turret = PIXI.Sprite.fromImage('/img/spaceship-turret.png');
+    this.turret.tint = this.tint;
+    this.turret.anchor.x = 0.45;
+    this.turret.anchor.y = 0.6;
+    this.turret.pivot.x = 1;
+    this.turret.pivot.y = 7;
+    this.container.addChild(this.turret);
 
-				// name
-				this.textStyle = { fontFamily: 'Arial', fontSize: '14px', fill: 'rgb(0,255,0)', align: 'center' };
-				this.text = new PIXI.Text(name, this.textStyle);
-				this.text.anchor.x = 0.5;
-				this.text.anchor.y = 0.5;
-				this.game.stage.addChild(this.text);
+    // name
+    this.textStyle = { fontFamily: 'Arial', fontSize: '14px', fill: 'rgb(0,255,0)', align: 'center' };
+    this.text = new PIXI.Text(name, this.textStyle);
+    this.text.anchor.x = 0.5;
+    this.text.anchor.y = 0.5;
+    this.game.stage.addChild(this.text);
 
-				// ka boom
-				this.explosion = new PIXI.extras.AnimatedSprite(global.EXPLOSION_FRAMES.map(PIXI.Texture.fromImage));
-				this.explosion.anchor.x = 0.5;
-				this.explosion.anchor.y = 0.5;
-				this.explosion.loop = false;
+    // ka boom
+    this.explosion = new PIXI.extras.AnimatedSprite(global.EXPLOSION_FRAMES.map(PIXI.Texture.fromImage));
+    this.explosion.anchor.x = 0.5;
+    this.explosion.anchor.y = 0.5;
+    this.explosion.loop = false;
 
-				//things
-				this.speed = 0;
-				this.timeLastBulletFired = 0;
-				this.health = MAX_HEALTH;
-				this.name = name;
-				this.isDestroyed = false;
+    //things
+    this.speed = 0;
+    this.timeLastBulletFired = 0;
+    this.health = MAX_HEALTH;
+    this.name = name;
+    this.kills = 0;
+    this.isDestroyed = false;
 
-				this.game.stage.addChild(this.container);
+    this.game.stage.addChild(this.container);
 
-				this.game.on('update', this.update.bind(this));
-		}
+    this.game.on('update', this.update.bind(this));
+  }
 
-		(0, _createClass3.default)(SpaceShip, [{
-				key: 'checkHit',
-				value: function checkHit(bulletPosition) {
-						var _this = this;
+  (0, _createClass3.default)(SpaceShip, [{
+    key: 'checkHit',
+    value: function checkHit(_ref) {
+      var _this = this;
 
-						if (this.body.containsPoint(bulletPosition)) {
-								this.body.tint = 0xFF0000;
-								this.turret.tint = 0xFF0000;
-								setTimeout(function () {
-										_this.body.tint = _this.tint;
-										_this.turret.tint = _this.tint;
-								}, 500);
+      var position = _ref.position,
+          source = _ref.source;
 
-								this.health -= 1;
+      if (this.body.containsPoint(position)) {
+        this.body.tint = 0xFF0000;
+        this.turret.tint = 0xFF0000;
+        setTimeout(function () {
+          _this.body.tint = _this.tint;
+          _this.turret.tint = _this.tint;
+        }, 500);
 
-								if (this.health <= 0) {
-										this.onDestroyed();
-								} else {
-										var healtRemain = this.health / MAX_HEALTH;
-										var g = Math.floor(healtRemain * 255);
-										var r = Math.floor((1 - healtRemain) * 255);
+        this.health -= 1;
 
-										// this.text.style = {...this.textStyle, fill: `rgb(${r}, ${g}, 0)`};
-										this.text.style = (0, _assign2.default)(this.textStyle, { fill: 'rgb(' + r + ', ' + g + ', 0)' });
-								}
-								return true;
-						}
-						return false;
-				}
-		}, {
-				key: 'onDestroyed',
-				value: function onDestroyed() {
-						this.isDestroyed = true;
-						this.game.stage.addChild(this.explosion);
-						this.explosion.position.x = this.container.position.x;
-						this.explosion.position.y = this.container.position.y;
-						this.explosion.play();
-						this.game.stage.removeChild(this.container);
-				}
-		}, {
-				key: 'remove',
-				value: function remove() {
-						this.game.stage.removeChild(this.explosion);
-						this.game.stage.removeChild(this.text);
-						this.record.delete();
-				}
-		}, {
-				key: 'update',
-				value: function update(msSinceLastFrame, currentTime) {
-						var data = this.record.get();
-						if (!this.record.ready || !data.bodyRotation) {
-								return;
-						}
+        if (this.health <= 0) {
+          console.log('why?');
+          if (!this.isDestroyed) source.kills += 1;
+          this.onDestroyed();
+        } else {
+          var healtRemain = this.health / MAX_HEALTH;
+          var g = Math.floor(healtRemain * 255);
+          var r = Math.floor((1 - healtRemain) * 255);
 
-						/*
+          // this.text.style = {...this.textStyle, fill: `rgb(${r}, ${g}, 0)`};
+          this.text.style = (0, _assign2.default)(this.textStyle, { fill: 'rgb(' + r + ', ' + g + ', 0)' });
+        }
+        return true;
+      }
+      return false;
+    }
+  }, {
+    key: 'onDestroyed',
+    value: function onDestroyed() {
+      this.isDestroyed = true;
+      this.game.stage.addChild(this.explosion);
+      this.explosion.position.x = this.container.position.x;
+      this.explosion.position.y = this.container.position.y;
+      this.explosion.play();
+      this.game.stage.removeChild(this.container);
+    }
+  }, {
+    key: 'remove',
+    value: function remove() {
+      this.game.stage.removeChild(this.explosion);
+      this.game.stage.removeChild(this.text);
+      this.record.delete();
+    }
+  }, {
+    key: 'update',
+    value: function update(msSinceLastFrame, currentTime) {
+      var data = this.record.get();
+      if (!this.record.ready || !data.bodyRotation) {
+        return;
+      }
+
+      /*
         t = (vf - vi) / a
         a*t = (vf - vi)
         vf = vi + a*t
@@ -16605,52 +16610,52 @@ var SpaceShip = function () {
           a = ACCELERATION = 0.01
           vi = this._speed
       */
-						this.speed += msSinceLastFrame * ACCELERATION * (data.moving ? 1 : -1);
+      this.speed += msSinceLastFrame * ACCELERATION * (data.moving ? 1 : -1);
 
-						this.turret.rotation = data.turretRotation - data.bodyRotation;
-						this.container.rotation = data.bodyRotation;
+      this.turret.rotation = data.turretRotation - data.bodyRotation;
+      this.container.rotation = data.bodyRotation;
 
-						if (this.speed < 0) {
-								this.speed = 0;
-						} else if (this.speed > MAX_SPEED) {
-								this.speed = MAX_SPEED;
-						}
+      if (this.speed < 0) {
+        this.speed = 0;
+      } else if (this.speed > MAX_SPEED) {
+        this.speed = MAX_SPEED;
+      }
 
-						this.container.position.x += Math.sin(this.container.rotation) * this.speed;
-						this.container.position.y -= Math.cos(this.container.rotation) * this.speed;
+      this.container.position.x += Math.sin(this.container.rotation) * this.speed;
+      this.container.position.y -= Math.cos(this.container.rotation) * this.speed;
 
-						this.text.position.x = this.container.position.x;
-						this.text.position.y = this.container.position.y + 45;
+      this.text.position.x = this.container.position.x;
+      this.text.position.y = this.container.position.y + 45;
 
-						if (this.container.position.x < 0) {
-								this.container.position.x = 0;
-						} else if (this.container.position.x > this.game.renderer.width) {
-								this.container.position.x = this.game.renderer.width;
-						}
+      if (this.container.position.x < 0) {
+        this.container.position.x = 0;
+      } else if (this.container.position.x > this.game.renderer.width) {
+        this.container.position.x = this.game.renderer.width;
+      }
 
-						if (this.container.position.y < 0) {
-								this.container.position.y = 0;
-						} else if (this.container.position.y > this.game.renderer.height) {
-								this.container.position.y = this.game.renderer.height;
-						}
+      if (this.container.position.y < 0) {
+        this.container.position.y = 0;
+      } else if (this.container.position.y > this.game.renderer.height) {
+        this.container.position.y = this.game.renderer.height;
+      }
 
-						if (data.shooting && currentTime > this.timeLastBulletFired + FIRE_INTERVAL) {
-								var alpha = data.turretRotation;
-								var x = this.container.position.x + Math.sin(alpha) * TURRET_LENGTH;
-								var y = this.container.position.y - Math.cos(alpha) * TURRET_LENGTH;
+      if (data.shooting && currentTime > this.timeLastBulletFired + FIRE_INTERVAL) {
+        var alpha = data.turretRotation;
+        var x = this.container.position.x + Math.sin(alpha) * TURRET_LENGTH;
+        var y = this.container.position.y - Math.cos(alpha) * TURRET_LENGTH;
 
-								this.game.bulletManager.add(x, y, alpha, this);
-								this.timeLastBulletFired = currentTime;
-						}
+        this.game.bulletManager.add(x, y, alpha, this);
+        this.timeLastBulletFired = currentTime;
+      }
 
-						if (this.isDestroyed) {
-								if (this.explosion.currentFrame + 1 === this.explosion.totalFrames) {
-										this.game.removePlayer(this.name);
-								}
-						}
-				}
-		}]);
-		return SpaceShip;
+      if (this.isDestroyed) {
+        if (this.explosion.currentFrame + 1 === this.explosion.totalFrames) {
+          this.game.removePlayer(this.name);
+        }
+      }
+    }
+  }]);
+  return SpaceShip;
 }();
 
 exports.default = SpaceShip;
@@ -24753,10 +24758,12 @@ var Game = function (_EventEmitter) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Game.__proto__ || (0, _getPrototypeOf2.default)(Game)).call(this));
 
+    console.log('?');
     _this.stage = new PIXI.Container();
     _this.sc = sc;
     _this.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { transparent: true }, false);
     _this.spaceShips = [];
+    _this.scores = [];
     _this.lastFrameTime = 0;
 
     _this.bulletManager = new _bulletmanager2.default(_this);
@@ -24764,7 +24771,6 @@ var Game = function (_EventEmitter) {
     element.appendChild(_this.renderer.view);
     requestAnimationFrame(_this.tick.bind(_this));
 
-    // sc.event.listen('status/.*', this.playerOnlineStatusChanged.bind(this));
     _this.sc.onNewPlayer(_this.addPlayer.bind(_this));
     return _this;
   }
@@ -24775,18 +24781,10 @@ var Game = function (_EventEmitter) {
       this.emit('update', currentTime - this.lastFrameTime, currentTime);
       this.lastFrameTime = currentTime;
       this.renderer.render(this.stage);
+      this.scores.forEach(function (score) {
+        score.text = score.spaceship.name + ' - ' + score.spaceship.kills;
+      });
       requestAnimationFrame(this.tick.bind(this));
-    }
-  }, {
-    key: 'playerOnlineStatusChanged',
-    value: function playerOnlineStatusChanged(match, isSubscribed) {
-      var name = match.replace('status/', '');
-
-      if (isSubscribed) {
-        this.addPlayer(name);
-      } else {
-        this.removePlayer(name);
-      }
     }
   }, {
     key: 'addPlayer',
@@ -24796,7 +24794,16 @@ var Game = function (_EventEmitter) {
       })) {
         var x = this.renderer.width * (0.1 + Math.random() * 0.8);
         var y = this.renderer.height * (0.1 + Math.random() * 0.8);
-        this.spaceShips = [].concat((0, _toConsumableArray3.default)(this.spaceShips), [new _spaceship2.default(this, x, y, name, this.sc)]);
+        var spaceship = new _spaceship2.default(this, x, y, name, this.sc);
+        this.spaceShips = [].concat((0, _toConsumableArray3.default)(this.spaceShips), [spaceship]);
+        var textStyle = { fontFamily: 'Arial', fontSize: '14px', fill: 'rgb(0,255,0)', align: 'center' };
+        var score = new PIXI.Text(name + ' - ' + spaceship.kills, textStyle);
+        score.anchor.x = 0.5;
+        score.anchor.y = 0.5;
+        score.position = { x: this.renderer.width - 100, y: this.scores.length * 20 + 50 };
+        score.spaceship = spaceship;
+        this.scores = [].concat((0, _toConsumableArray3.default)(this.scores), [score]);
+        this.stage.addChild(score);
       }
     }
   }, {
@@ -24994,7 +25001,7 @@ var BulletManager = function () {
 				} else {
 					_this.game.spaceShips.forEach(function (spaceShip, index) {
 						if (spaceShip == bullet.source) return;
-						if (_this.game.spaceShips[index].checkHit(bullet.position)) {
+						if (_this.game.spaceShips[index].checkHit(bullet)) {
 							_this.recycleBullet(bullet, i);
 						}
 					});

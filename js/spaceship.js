@@ -53,6 +53,7 @@ class SpaceShip {
     this.timeLastBulletFired = 0;
     this.health = MAX_HEALTH;
     this.name = name;
+    this.kills = 0;
     this.isDestroyed = false;
 
     this.game.stage.addChild(this.container);
@@ -61,8 +62,8 @@ class SpaceShip {
 
   }
 
-  checkHit(bulletPosition) {
-		if(this.body.containsPoint(bulletPosition)) {
+  checkHit({position, source}) {
+		if(this.body.containsPoint(position)) {
 			this.body.tint = 0xFF0000;
 			this.turret.tint = 0xFF0000;
       setTimeout(() => {
@@ -73,6 +74,8 @@ class SpaceShip {
 			this.health -= 1;
 
 			if(this.health <= 0) {
+        console.log('why?');
+        if (!this.isDestroyed) source.kills += 1;
 			  this.onDestroyed();
 			} else {
 				const healtRemain = (this.health / MAX_HEALTH);
