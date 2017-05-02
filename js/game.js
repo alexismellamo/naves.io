@@ -1,7 +1,7 @@
 import SpaceShip from './spaceship';
 import BulletManager from './bulletmanager';
-const PIXI = require( 'pixi.js' );
-const EventEmitter = require( 'events' ).EventEmitter;
+import { EventEmitter } from 'events';
+const PIXI = require('pixi.js');
 
 class Game extends EventEmitter {
   constructor(element, sc) {

@@ -2,21 +2,23 @@ const path = require('path');
 require("babel-polyfill");
 
 module.exports = {
-  entry: { game: "./js/index.js.erb", control: "./js/controls/index.js" },
+  entry: { game: "./js/index.js", control: "./js/controls/index.js" },
   output: { filename: "./views/[name].js.erb" },
 
 	module: {
 		loaders: [
-			{
-				test: /\.json$/,
-				include: path.join(__dirname, 'node_modules', 'pixi.js'),
-				loader: 'json',
-			}
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }
 		],
+    resolve: {
+      extensions: ['', '.json', '.jsx', '.js']
+    },
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {

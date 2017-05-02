@@ -1,5 +1,4 @@
-const PIXI = require( 'pixi.js' );
-
+const PIXI = require('pixi.js');
 const colors = [0x468966, 0xFFF0A5, 0xFFB03B, 0xB64926, 0x8E2800];
 
 const MAX_HEALTH = 10;

@@ -1,1 +1,1 @@
-require('./controls.js.erb');
+require('./controls.js');

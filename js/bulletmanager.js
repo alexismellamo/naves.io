@@ -1,4 +1,4 @@
-const PIXI = require( 'pixi.js' );
+const PIXI = require('pixi.js');
 const SPEED = 7;
 
 export default class BulletManager {
@@ -7,11 +7,11 @@ export default class BulletManager {
 		this.game.on('update', this.update.bind(this));
 		this.activeBullets = [];
 		this.passiveBullets = [];
-		this.texture = PIXI.Texture.fromImage( '/img/bullet.png' );
+		this.texture = PIXI.Texture.fromImage('/img/bullet.png');
 	}
 
 	add(x, y, alpha, spaceShip) {
-		if( this.passiveBullets.length === 0 ) {
+		if(this.passiveBullets.length === 0) {
 			this.createBullet();
 		}
 

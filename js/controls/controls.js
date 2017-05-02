@@ -8,7 +8,7 @@ $(function() {
   let moveArea, shootArea;
 
 	const joinGame = () => {
-		const name = $( 'input#name' ).val();
+		const name = $('input#name').val();
     sc.getRecord(name).whenIsReady((record) => {
       record.setInitial({
 				name: name,
