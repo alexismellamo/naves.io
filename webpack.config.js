@@ -12,9 +12,6 @@ module.exports = {
         loader: 'json-loader'
       }
 		],
-    resolve: {
-      extensions: ['', '.json', '.jsx', '.js']
-    },
     rules: [
       {
         test: /\.js$/,
