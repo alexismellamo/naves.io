@@ -30,7 +30,8 @@ class Game extends EventEmitter {
     this.emit('update', currentTime - this.lastFrameTime, currentTime);
     this.lastFrameTime = currentTime;
     this.renderer.render(this.stage);
-    this.scores.forEach(score => {
+    this.scores.sort((a,b) => b.spaceship.kills - a.spaceship.kills).forEach((score, i) => {
+      score.position.y = i * 20 + 50
       score.text = `${score.spaceship.name} - ${score.spaceship.kills}`;
     })
     requestAnimationFrame(this.tick.bind(this));
@@ -57,6 +58,9 @@ class Game extends EventEmitter {
     const speceshipToRemove = this.spaceShips.find(spaceship => spaceship.name === name);
     if(speceshipToRemove) {
       speceshipToRemove.remove();
+      const score = this.scores.find(score => score.spaceship.name == name);
+      this.stage.removeChild(score);
+      this.scores = this.scores.filter(s => s !== score);
       this.spaceShips = this.spaceShips.filter(spaceship => spaceship.name !== name);
     }
 	}

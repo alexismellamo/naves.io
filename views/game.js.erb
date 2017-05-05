@@ -21200,7 +21200,10 @@ var Game = function (_EventEmitter) {
       this.emit('update', currentTime - this.lastFrameTime, currentTime);
       this.lastFrameTime = currentTime;
       this.renderer.render(this.stage);
-      this.scores.forEach(function (score) {
+      this.scores.sort(function (a, b) {
+        return b.spaceship.kills - a.spaceship.kills;
+      }).forEach(function (score, i) {
+        score.position.y = i * 20 + 50;
         score.text = score.spaceship.name + ' - ' + score.spaceship.kills;
       });
       requestAnimationFrame(this.tick.bind(this));
@@ -21233,6 +21236,13 @@ var Game = function (_EventEmitter) {
       });
       if (speceshipToRemove) {
         speceshipToRemove.remove();
+        var score = this.scores.find(function (score) {
+          return score.spaceship.name == name;
+        });
+        this.stage.removeChild(score);
+        this.scores = this.scores.filter(function (s) {
+          return s !== score;
+        });
         this.spaceShips = this.spaceShips.filter(function (spaceship) {
           return spaceship.name !== name;
         });
