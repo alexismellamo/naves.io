@@ -30,9 +30,10 @@ class Game extends EventEmitter {
     this.emit('update', currentTime - this.lastFrameTime, currentTime);
     this.lastFrameTime = currentTime;
     this.renderer.render(this.stage);
-    this.scores.sort((a,b) => b.spaceship.kills - a.spaceship.kills).forEach((score, i) => {
-      score.position.y = i * 20 + 50
-      score.text = `${score.spaceship.name} - ${score.spaceship.kills}`;
+    this.scores.sort((a,b) => b.spaceship.kills - a.spaceship.kills)
+      .forEach((score, i) => {
+        score.position.y = i * 20 + 50
+        score.text = `${score.spaceship.name} - ${score.spaceship.kills}`;
     })
     requestAnimationFrame(this.tick.bind(this));
 	}
