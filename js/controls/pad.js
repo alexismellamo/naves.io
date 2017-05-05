@@ -46,12 +46,7 @@ Pad.prototype.setSize = function() {
 
 Pad.prototype.onStart = function (event) {
 	event.preventDefault();
-  let log = false;
-  if(this.type !== 'move') {
-    console.log('start');
-    log = true;
-  }
-	this.record.set(this.activeType, true, log);
+	this.record.set(this.activeType, true);
 }
 
 Pad.prototype.onMouse = function (event) {
@@ -73,12 +68,7 @@ Pad.prototype.setAngle = function (cX, cY, pX, pY) {
 }
 
 Pad.prototype.onEnd = function() {
-  let log = false;
-  if(this.type !== 'move') {
-    console.log('end');
-    log = true;
-  }
-	this.record.set(this.activeType, false, log);
+	this.record.set(this.activeType, false);
 }
 
 export default Pad;

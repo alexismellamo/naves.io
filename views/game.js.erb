@@ -23087,8 +23087,7 @@ var BulletManager = function () {
 					_this.recycleBullet(bullet, i);
 				} else {
 					_this.game.spaceShips.forEach(function (spaceShip, index) {
-						if (spaceShip == bullet.source) return;
-						if (_this.game.spaceShips[index].checkHit(bullet)) {
+						if (spaceShip !== bullet.source && _this.game.spaceShips[index].checkHit(bullet)) {
 							_this.recycleBullet(bullet, i);
 						}
 					});
