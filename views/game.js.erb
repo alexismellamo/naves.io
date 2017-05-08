@@ -14194,7 +14194,7 @@ function reqType(xhr) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -14211,6 +14211,10 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 var _createClass2 = __webpack_require__(28);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _explosionframes = __webpack_require__(318);
+
+var _explosionframes2 = _interopRequireDefault(_explosionframes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14260,7 +14264,7 @@ var SpaceShip = function () {
     this.game.stage.addChild(this.text);
 
     // ka boom
-    this.explosion = new PIXI.extras.AnimatedSprite(global.EXPLOSION_FRAMES.map(PIXI.Texture.fromImage));
+    this.explosion = new PIXI.extras.AnimatedSprite(_explosionframes2.default.map(PIXI.Texture.fromImage));
     this.explosion.anchor.x = 0.5;
     this.explosion.anchor.y = 0.5;
     this.explosion.loop = false;
@@ -14393,7 +14397,6 @@ var SpaceShip = function () {
 }();
 
 exports.default = SpaceShip;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
 /* 130 */
@@ -22970,7 +22973,7 @@ exports.default = Game;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -22983,6 +22986,10 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 var _createClass2 = __webpack_require__(28);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _explosionframes = __webpack_require__(318);
+
+var _explosionframes2 = _interopRequireDefault(_explosionframes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23015,12 +23022,11 @@ var Loader = function () {
 	}, {
 		key: 'addExplosionFrames',
 		value: function addExplosionFrames() {
-			global.EXPLOSION_FRAMES = [];
-			for (var i = 1; i < 24; i++) {
-				var url = '/img/explosion/explosion_frame_' + i + '.png';
-				this.assetLoader.add(url);
-				global.EXPLOSION_FRAMES.push(url);
-			}
+			var _this = this;
+
+			_explosionframes2.default.forEach(function (url) {
+				return _this.assetLoader.add(url);
+			});
 		}
 	}, {
 		key: 'onImagesLoaded',
@@ -23046,7 +23052,6 @@ var Loader = function () {
 }();
 
 exports.default = new Loader();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
 /* 186 */
@@ -44827,6 +44832,24 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var EXPLOSION_FRAMES = [];
+for (var i = 1; i < 24; i++) {
+  var url = "/img/explosion/explosion_frame_" + i + ".png";
+  EXPLOSION_FRAMES.push(url);
+}
+
+exports.default = EXPLOSION_FRAMES;
 
 /***/ })
 /******/ ]);

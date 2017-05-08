@@ -1,3 +1,4 @@
+import EXPLOSION_FRAMES from './explosionframes';
 const PIXI = require('pixi.js');
 
 class Loader {
@@ -22,12 +23,7 @@ class Loader {
 	}
 
   addExplosionFrames() {
-		global.EXPLOSION_FRAMES = [];
-		for(let i = 1; i < 24; i++) {
-			const url = `/img/explosion/explosion_frame_${i}.png`;
-			this.assetLoader.add(url);
-			global.EXPLOSION_FRAMES.push(url);
-		}
+    EXPLOSION_FRAMES.forEach(url => this.assetLoader.add(url));
   }
 
   onImagesLoaded() {

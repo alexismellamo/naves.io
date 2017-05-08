@@ -1,3 +1,4 @@
+import EXPLOSION_FRAMES from './explosionframes';
 const PIXI = require('pixi.js');
 const colors = [0x468966, 0xFFF0A5, 0xFFB03B, 0xB64926, 0x8E2800];
 
@@ -42,7 +43,7 @@ class SpaceShip {
 		this.game.stage.addChild(this.text);
 
     // ka boom
-    this.explosion = new PIXI.extras.AnimatedSprite(global.EXPLOSION_FRAMES.map(PIXI.Texture.fromImage));
+    this.explosion = new PIXI.extras.AnimatedSprite(EXPLOSION_FRAMES.map(PIXI.Texture.fromImage));
 		this.explosion.anchor.x = 0.5;
 		this.explosion.anchor.y = 0.5;
 		this.explosion.loop = false;
