@@ -7895,10 +7895,9 @@ var Record = function () {
     }
   }, {
     key: 'set',
-    value: function set(key, value, log) {
+    value: function set(key, value) {
       var data = (0, _extends4.default)({}, this.data, (0, _defineProperty3.default)({}, key, value));
       this.data = data;
-      if (log) console.log(data);
       this.ws.send((0, _stringify2.default)((0, _extends4.default)({}, data, { player: this.name })));
     }
   }, {

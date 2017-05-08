@@ -77,10 +77,9 @@ class Record {
     this.ws.send(JSON.stringify({...data, player: this.name, new: true}));
   }
 
-  set(key, value, log) {
+  set(key, value) {
     const data = {...this.data, [key]: value};
     this.data = data;
-    if(log) console.log(data)
     this.ws.send(JSON.stringify({...data, player: this.name}));
   }
 

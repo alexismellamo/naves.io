@@ -29,11 +29,8 @@ export default class BulletManager {
 			bullet.position.x += Math.sin(bullet.rotation) * SPEED;
 			bullet.position.y -= Math.cos(bullet.rotation) * SPEED;
 
-			if(
-				bullet.position.x < 0 ||
-				bullet.position.x > this.game.renderer.width ||
-				bullet.position.y < 0 ||
-				bullet.position.y > this.game.renderer.height
+			if(bullet.position.x < 0 || bullet.position.x > this.game.renderer.width ||
+				bullet.position.y < 0 || bullet.position.y > this.game.renderer.height
 			) {
 				this.recycleBullet(bullet, i);
 			} else {
