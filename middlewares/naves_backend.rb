@@ -7,7 +7,7 @@ require 'erb'
 
 module Naves
   class NavesBackend
-    KEEPALIVE_TIME = 15 # in seconds
+    KEEPALIVE_TIME = 60 # in seconds
     CHANNEL = "naves"
 
     def initialize(app)

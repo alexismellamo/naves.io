@@ -1,7 +1,7 @@
 const PIXI = require('pixi.js');
 const SPEED = 7;
 
-export default class BulletManager {
+class BulletManager {
 	constructor(game) {
 		this.game = game;
 		this.game.on('update', this.update.bind(this));
@@ -63,3 +63,5 @@ export default class BulletManager {
 		this.game.stage.addChild(bullet);
 	}
 }
+
+export default BulletManager;
