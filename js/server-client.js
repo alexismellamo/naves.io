@@ -1,3 +1,5 @@
+import { EventEmitter } from 'events';
+
 class ServerClient {
 	constructor(url) {
     this.ws = new WebSocket(url);
@@ -18,6 +20,7 @@ class ServerClient {
     if(data.channel === 'delete') {
       const recordToRemove = this.records.find(record => record.name === data.player);
       if(recordToRemove) {
+        recordToRemove.emit('delete');
         this.records = this.records.filter(record => record.name !== data.player);
       }
     }
@@ -38,13 +41,18 @@ class ServerClient {
   }
 }
 
-class Record {
+class Record extends EventEmitter {
   constructor(name, ws) {
+    super();
     this.name = name;
     this.data = {};
     this.ws = ws;
     this.ready = false;
     this.setRecord();
+  }
+
+  once(event, callback) {
+    this.on(event, callback);
   }
 
   whenIsReady(callback) {
@@ -88,7 +96,7 @@ class Record {
   }
 
   delete() {
-    this.ws.send(JSON.stringify({channel: 'delete', player: this.name}))
+    this.ws.send(JSON.stringify({channel: 'delete', player: this.name}));
   }
 
 }

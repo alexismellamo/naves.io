@@ -7744,6 +7744,18 @@ var _asyncToGenerator2 = __webpack_require__(81);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
+var _getPrototypeOf = __webpack_require__(191);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _possibleConstructorReturn2 = __webpack_require__(196);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(195);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
 var _toConsumableArray2 = __webpack_require__(64);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
@@ -7755,6 +7767,8 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 var _createClass2 = __webpack_require__(28);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _events = __webpack_require__(215);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7787,6 +7801,7 @@ var ServerClient = function () {
           return record.name === data.player;
         });
         if (recordToRemove) {
+          recordToRemove.emit('delete');
           this.records = this.records.filter(function (record) {
             return record.name !== data.player;
           });
@@ -7814,18 +7829,28 @@ var ServerClient = function () {
   return ServerClient;
 }();
 
-var Record = function () {
+var Record = function (_EventEmitter) {
+  (0, _inherits3.default)(Record, _EventEmitter);
+
   function Record(name, ws) {
     (0, _classCallCheck3.default)(this, Record);
 
-    this.name = name;
-    this.data = {};
-    this.ws = ws;
-    this.ready = false;
-    this.setRecord();
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Record.__proto__ || (0, _getPrototypeOf2.default)(Record)).call(this));
+
+    _this.name = name;
+    _this.data = {};
+    _this.ws = ws;
+    _this.ready = false;
+    _this.setRecord();
+    return _this;
   }
 
   (0, _createClass3.default)(Record, [{
+    key: 'once',
+    value: function once(event, callback) {
+      this.on(event, callback);
+    }
+  }, {
     key: 'whenIsReady',
     value: function whenIsReady(callback) {
       if (this.ready) {
@@ -7912,7 +7937,7 @@ var Record = function () {
     }
   }]);
   return Record;
-}();
+}(_events.EventEmitter);
 
 exports.default = ServerClient;
 

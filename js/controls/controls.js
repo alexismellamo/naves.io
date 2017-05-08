@@ -21,32 +21,14 @@ $(function() {
       moveArea.setRecord(record);
       shootArea.setRecord(record);
 
+	  	record.once('delete',  () => {
+				$('.overlay').addClass('game-over').fadeIn(300);
+				$('#game-over button').one('touch click', joinGame);
+			});
+
+
       $('.overlay').removeClass('game-over').fadeOut(500);
     });
-
-
-		// ds.record.getRecord(recordName).whenReady(function(record) {
-    //   console.log(record);
-		// 	record.set({
-		// 		name: name,
-		// 		moving: false,
-		// 		shooting: false,
-		// 		bodyRotation: 0,
-		// 		turretRotation: 0
-		// 	});
-
-		// 	record.once('delete',  function() {
-		// 		$('.overlay').addClass('game-over').fadeIn(300);
-		// 		$('#game-over button').one('touch click', joinGame);
-		// 		ds.event.unsubscribe('status/' + name);
-		// 	});
-
-		// 	ds.event.subscribe('status/' + name, function() {});
-		// 	moveArea.setRecord(record);
-		// 	shootArea.setRecord(record);
-
-		// 	$('.overlay').removeClass('game-over').fadeOut(500);
-		// });
 	};
 
 	const startApp = () => {
