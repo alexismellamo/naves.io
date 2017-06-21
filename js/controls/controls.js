@@ -8,22 +8,24 @@ $(function() {
   let moveArea, shootArea;
 
 	const joinGame = () => {
-		const name = $('input#name').val();
+    const name = $('input#name').val();
     sc.getRecord(name).whenIsReady((record) => {
       record.setInitial({
-				name: name,
-				moving: false,
-				shooting: false,
-				bodyRotation: 0,
-				turretRotation: 0
+        name: name,
+        moving: false,
+        shooting: false,
+        bodyRotation: 0,
+        turretRotation: 0
 			});
 
       moveArea.setRecord(record);
       shootArea.setRecord(record);
 
-	  	record.once('delete',  () => {
-				$('.overlay').addClass('game-over').fadeIn(300);
-				$('#game-over button').one('touch click', joinGame);
+      record.once('delete',  () => {
+        $('.overlay')
+          .addClass('game-over')
+          .fadeIn(300);
+        $('#game-over button').one('touch click', joinGame);
 			});
 
 
