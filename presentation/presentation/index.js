@@ -37,7 +37,19 @@ const images = {
   flashLogoDc: require('../assets/flash-logo-dc.jpg'),
   horribleGames: require('../assets/horrible-games.jpg'),
   iDareYou: require('../assets/i-dare-you.jpg'),
-  miguelHidalgo: require('../assets/miguel-hidalgo.jpg')
+  miguelHidalgo: require('../assets/miguel-hidalgo.jpg'),
+  playN64: require('../assets/play-n64.png'),
+  myNameIs: require('../assets/my-name-is.jpg'),
+  space: require('../assets/space-background.svg'),
+  spaceship: require('../assets/spaceship-body.png'),
+  turret: require('../assets/spaceship-turret.png'),
+  bgControlPad: require('../assets/bg-control-pad.svg'),
+  bgControlAngle: require('../assets/bg-control-angle-indicator.svg'),
+  explotion: require('../assets/explotion.gif'),
+  yop: require('../assets/yop.gif'),
+  timeCard: require('../assets/time-card.jpg'),
+  gameplay: require('../assets/gameplay.gif'),
+  mathLady: require('../assets/math-lady.png')
 };
 
 preloader(images);
@@ -88,6 +100,18 @@ const note9 = `Cada vez que veo que alguna pagina sigue usando Flash
 Esto me dan ganas de decirle
 `;
 
+const note10 = `Cuando empecé con este proyecto quería hacer algo divertido pero tampoco tan difícil, porque no tenía tanto tiempo, no duden de mis habilidades
+Así que pensé en navecitas, de ahí el nombre, porque qué tan dificil puede hacer un juego de navecitas y pium pium
+Pero no quería hacer naves que dispararan solas, así que tenía que ser multijugador
+Va a ser en 2D porque es más fácil así y no sé nada sobre modelado
+Pero quería rescatar algo que se está perdiendo:
+`;
+
+const note11 = `jugar en el mismo cuarto, donde te puedes reir en la cara de la gente a la que le ganas,
+ahora, en el browser no puedes conectar controles a un browser (o sí?), así que necesitaba otra cosa
+y pensé en usar el celular como control, así que ahora sí, me dispuse a hacer el juego
+`;
+
 export default class Presentation extends Component {
   render() {
     return (
@@ -103,7 +127,7 @@ export default class Presentation extends Component {
             La aventura de hacer juegos en el browser
           </Text>
         </Slide>
-        <Slide transition={['fade']} bgColor="black">
+        <Slide transition={['fade']} bgImage={images.myNameIs.replace('/', '')} bgDarken={0.8}>
           <Heading size={1} textColor="primary">Alexis Navarro</Heading>
           <Appear><Text size={6} textColor="quartenary">Experto en memes</Text></Appear>
         </Slide>
@@ -204,35 +228,101 @@ export default class Presentation extends Component {
             Mi intento por hacer un juego con WebGL
           </Text>
         </Slide>
-        <Slide transition={['fade']} bgColor="black">
-          <Heading size={1} fit caps lineHeight={1} textColor="black">
-            WebGL
+        <Slide transition={['fade']} bgColor="black" notes={note10}>
+          <Heading size={1} fit>
+            ¿Qué quería hacer?
           </Heading>
-          <Heading size={1} fit caps>
-            es una API de JavaScript
+        </Slide>
+        <Slide transition={['slide']} bgColor="primary" notes={note11}>
+          <Image src={images.playN64.replace('/', '')} margin="0px auto 40px" height="600px"/>
+        </Slide>
+        <Slide transition={['fade']} bgColor="black" notes={''}>
+          <Heading size={1} fit textColor="primary">
+            ¿Qué cosas se necesitan básicas?
           </Heading>
-          <Heading size={1} fit caps textColor="black">
-            para rendenriar gráficos 2D y 3D
-          </Heading>
+           <List transition={['slide']} textColor="tertiary">
+            <Appear><ListItem>Sprites</ListItem></Appear>
+            <Appear><ListItem>WebGL</ListItem></Appear>
+            <Appear><ListItem>JavaScript</ListItem></Appear>
+            <Appear><ListItem>Matemáticas básicas</ListItem></Appear>
+            <Appear><ListItem>WebSockets</ListItem></Appear>
+            <Appear><ListItem>Backend</ListItem></Appear>
+            <Appear><ListItem>Ganas de hacerlo</ListItem></Appear>
+          </List>
+        </Slide>
+        <Slide transition={['slide']} bgImage={images.space.replace('/', '')} notes={''}>
+          <Text textColor="primary">Sprites: </Text>
+          <Image src={images.spaceship.replace('/', '')} margin="0px auto 40px" height="100px"/>
+          <Image src={images.turret.replace('/', '')} margin="0px auto 40px" height="100px"/>
+          <Image src={images.bgControlPad.replace('/', '')} margin="0px auto 40px" height="100px"/>
+          <Image src={images.bgControlAngle.replace('/', '')} margin="0px auto 40px" height="100px"/>
+          <Image src={images.explotion.replace('/', '')} margin="0px auto 40px" height="100px"/>
+        </Slide>
+        <Slide transition={['fade']} bgColor="black" notes={'y me puse manos a la obra'}>
+          <Image src={images.yop.replace('/', '')} margin="0px auto 40px" height="600px"/>
+        </Slide>
+        <Slide transition={['fade']} bgColor="black" notes={'y después de mucho sufrir y llorar logramos el cometido'}>
+          <Image src={images.timeCard.replace('/', '')} margin="0px auto 40px" height="600px"/>
+        </Slide>
+        <Slide transition={['fade']} bgColor="black" notes={'y después de mucho sufrir y llorar logramos el cometido'}>
+          <Image src={images.gameplay.replace('/', '')} margin="0px auto 40px" height="500px"/>
+        </Slide>
+        <Slide transition={['slide']} bgImage={images.mathLady.replace('/', '')} bgDarken={0.8} notes="question">
+          <Text textColor="primary">Se acuerdan que les dije que necesitamos matemáticas?</Text>
         </Slide>
         <CodeSlide
           lang="jsx"
-          code={require('raw-loader!/Users/alexis/Documents/Dev/michelada/naves.io/js/controls/controls.js')}
-          margin="20px auto"
+          code={require('raw-loader!/Users/alexis/Documents/Dev/michelada/naves.io/js/controls/pad.js')}
           ranges={[
-            { loc: [0, 0], title: 'Control.js' },
-            { loc: [0, 6], note: 'The Beginning' },
-            { loc: [6, 11], note: 'Heres a note!' },
-            { loc: [11, 16] },
-            { loc: [16, 21] },
-            { loc: [21, 26] }
+            { loc: [0, 0], title: 'pad.js' },
+            { loc: [63, 68], note: 'Si alguien sabe lo que está pasando aquí le compro una chela' }
           ]}
         />
+        <CodeSlide
+          lang="jsx"
+          code={require('raw-loader!/Users/alexis/Documents/Dev/michelada/naves.io/js/game.js')}
+          ranges={[
+            { loc: [0, 0], title: 'The loop' },
+            { loc: [28, 33] },
+            { loc: [33, 39] }
+          ]}
+        />
+        <CodeSlide
+          lang="jsx"
+          code={require('raw-loader!/Users/alexis/Documents/Dev/michelada/naves.io/js/spaceship.js')}
+          ranges={[
+            { loc: [0, 0], title: 'spaceship.js' },
+            { loc: [105, 111] },
+            { loc: [111, 123] },
+            { loc: [123, 131] },
+            { loc: [132, 138] },
+            { loc: [138, 149] },
+            { loc: [150, 159] },
+            { loc: [159, 166] }
+          ]}
+        />
+        <Slide transition={["zoom"]} bgColor="primary">
+          <Heading size={1} fit caps lineHeight={1} textColor="black">
+            naves.io
+          </Heading>
+          <Heading size={1} fit caps>
+            Un juego de navecitas
+          </Heading>
+          <Heading size={1} fit caps textColor="black">
+            Donde puedes matar a otras navecitas
+          </Heading>
+          <Link href="https://github.com/alexisllamas/naves.io">
+            <Text bold caps textColor="tertiary">Ver en Github</Text>
+          </Link>
+        </Slide>
         <Slide transition={['fade']} bgColor="secondary" textColor="primary">
           <BlockQuote>
             <Quote>Hacer videojuegos es un pedo</Quote>
             <Cite>Alexis Navarro</Cite>
           </BlockQuote>
+        </Slide>
+        <Slide transition={['slide']} bgColor="tertiary" textColor="primary" notes="hola">
+          <Text textColor="primary">Adiós</Text>
         </Slide>
       </Deck>
     );
