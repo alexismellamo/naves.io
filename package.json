@@ -27,7 +27,7 @@
     "babel-preset-es2017": "^6.24.1",
     "deepstream.io": "^2.2.0",
     "deepstream.io-client-js": "^2.1.4",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "pixi.js": "^4.5.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2"
